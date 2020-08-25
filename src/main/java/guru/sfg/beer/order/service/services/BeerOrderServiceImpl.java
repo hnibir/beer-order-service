@@ -87,14 +87,12 @@ public class BeerOrderServiceImpl implements BeerOrderService {
             beerOrder.setOrderStatus(OrderStatusEnum.NEW);
 
             beerOrder.getBeerOrderLines().forEach(line -> line.setBeerOrder(beerOrder));
-
             BeerOrder savedBeerOrder = beerOrderRepository.saveAndFlush(beerOrder);
 
-            log.debug("Saved Beer Order: " + beerOrder.getId());
+            log.debug("Saved Beer Order: " + savedBeerOrder.getId());
 
             //todo impl
-          //  publisher.publishEvent(new NewBeerOrderEvent(savedBeerOrder));
-
+            //  publisher.publishEvent(new NewBeerOrderEvent(savedBeerOrder));
             return beerOrderMapper.beerOrderToDto(savedBeerOrder);
         }
         //todo add exception type
